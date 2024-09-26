@@ -1,18 +1,16 @@
-import { DB, readDB, writeDB  } from "@lib/DB";
+import { DB, readDB, writeDB } from "@lib/DB";
 import { checkToken } from "@lib/checkToken";
 import { ok } from "assert";
 import { nanoid } from "nanoid";
 import { NextRequest, NextResponse } from "next/server";
+import  Room  from "@lib/DB";
 
-interface RequestBody {
-  roomId: string;
-  messageText: string;
-}
+
 
 export const GET = async (request: NextRequest) => {
   try {
     readDB();
-    const body: RequestBody = await request.json();
+    const body = await request.json();
     const { roomId } = body; 
     const foundroomId = DB.rooms.find((x:any) => x.roomId === roomId);
     
@@ -57,7 +55,7 @@ export const GET = async (request: NextRequest) => {
 export const POST = async (request: NextRequest) => {
   readDB();
   try{
-    const body: RequestBody = await request.json();
+    const body = await request.json();
     const { roomId, messageText } = body;
 
     const foundRoomId = DB.rooms.find((x) => x.roomId === roomId);
@@ -144,7 +142,7 @@ export const DELETE = async (request: NextRequest) => {
     const body: { messageId: string } = await request.json();
     const { messageId } = body;
 
-    const messageIndex = DB.messages.findIndex((msg) => msg.messageId === messageId);
+    const messageIndex = DB.messages.findIndex((msg: any) => msg.messageId === messageId);
     if (messageIndex === -1) {
       return NextResponse.json(
         {
