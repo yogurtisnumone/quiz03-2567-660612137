@@ -58,7 +58,7 @@ export const POST = async (request: NextRequest) => {
     const body = await request.json();
     const { roomId, messageText } = body;
 
-    const foundRoomId = DB.rooms.find((x) => x.roomId === roomId);
+    const foundRoomId = (<Database>DB).rooms.find((x) => x.roomId === roomId);
     if (!foundRoomId) {
       return NextResponse.json(
         {
@@ -79,7 +79,7 @@ export const POST = async (request: NextRequest) => {
     }
 
     const messageId = nanoid();
-    DB.messages.push({
+    (<Database>DB).message.push({
       messageId,
       roomId,
       messageText,
@@ -142,7 +142,7 @@ export const DELETE = async (request: NextRequest) => {
     const body: { messageId: string } = await request.json();
     const { messageId } = body;
 
-    const messageIndex = DB.messages.findIndex((msg: any) => msg.messageId === messageId);
+    const messageIndex = (<Database>DB).message.findIndex((msg: any) => msg.messageId === messageId);
     if (messageIndex === -1) {
       return NextResponse.json(
         {
@@ -153,7 +153,7 @@ export const DELETE = async (request: NextRequest) => {
       );
     }
 
-    DB.messages.splice(messageIndex, 1);
+    (<Database>DB).message.splice(messageIndex, 1);
   
     writeDB();
 
