@@ -1,4 +1,4 @@
-import { DB, readDB, writeDB } from "@lib/DB";
+import { DB, readDB, writeDB  } from "@lib/DB";
 import { checkToken } from "@lib/checkToken";
 import { ok } from "assert";
 import { nanoid } from "nanoid";
