@@ -5,15 +5,10 @@ import { DB, readDB } from "@lib/DB";
 import { NextRequest, NextResponse } from "next/server";
 
 
-interface PostRequestBody {
-  username: string;
-  password: string;
-}
-
 export const POST = async (request: NextRequest) => {
   readDB();
 
-  const body: PostRequestBody = await request.json();
+  const body = await request.json();
   const { username, password } = body;
 
   const user = (<Database>DB).users.find(
