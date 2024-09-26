@@ -1,6 +1,5 @@
 import { DB, readDB, writeDB } from "@lib/DB";
 import { checkToken } from "@lib/checkToken";
-import { ok } from "assert";
 import { nanoid } from "nanoid";
 import { NextRequest, NextResponse } from "next/server";
 import {  Database } from "@lib/DB";

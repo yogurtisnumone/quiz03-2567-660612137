@@ -1,5 +1,3 @@
-import jwt from "jsonwebtoken";
-
 import { Database } from "@lib/DB";
 import { DB, readDB } from "@lib/DB";
 import { NextRequest, NextResponse } from "next/server";
