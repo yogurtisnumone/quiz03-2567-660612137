@@ -2,15 +2,10 @@ import { DB, readDB, writeDB } from "@lib/DB";
 import { checkToken } from "@lib/checkToken";
 import { nanoid } from "nanoid";
 import { NextRequest, NextResponse } from "next/server";
-import { JwtPayload } from "jsonwebtoken";
 
-interface PostRequestBody {
-  roomName: string;
-}
 
 export const GET = async () => {
   readDB();
-
   const rooms = DB.rooms;
   const totalRooms = rooms.length;
 

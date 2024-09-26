@@ -3,7 +3,7 @@ import { checkToken } from "@lib/checkToken";
 import { ok } from "assert";
 import { nanoid } from "nanoid";
 import { NextRequest, NextResponse } from "next/server";
-import  Room  from "@lib/DB";
+import {  Database } from "@lib/DB";
 
 
 
@@ -12,7 +12,7 @@ export const GET = async (request: NextRequest) => {
     readDB();
     const body = await request.json();
     const { roomId } = body; 
-    const foundroomId = DB.rooms.find((x:any) => x.roomId === roomId);
+    const foundroomId = (<Database>DB).rooms.find((x:any) => x.roomId === roomId);
     
     if( !foundroomId ){
       return NextResponse.json(
@@ -32,7 +32,7 @@ export const GET = async (request: NextRequest) => {
     //   { status: 404 }
     // );
 
-    const messages = DB.messages.filter((msg : any) => msg.roomid === roomid );
+    const messages = (<Database>DB).message.filter((msg : any) => msg.roomId === roomId );
     return NextResponse.json(
       {
         ok: true,
