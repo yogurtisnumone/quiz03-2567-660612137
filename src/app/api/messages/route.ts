@@ -5,7 +5,7 @@ import { nanoid } from "nanoid";
 import { NextRequest, NextResponse } from "next/server";
 
 interface RequestBody {
-  roomid: string;
+  roomId: string;
   messageText: string;
 }
 
