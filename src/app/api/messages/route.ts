@@ -3,8 +3,26 @@ import { checkToken } from "@lib/checkToken";
 import { nanoid } from "nanoid";
 import { NextRequest, NextResponse } from "next/server";
 
+interface RequestBody {
+  roomid: string;
+  messageText: string;
+}
+
 export const GET = async (request: NextRequest) => {
   readDB();
+  const body: RequestBody = await request.json();
+  const { roomid } = body; 
+  const froomid = DB.rooms.find((x) => x.roomid === roomid);
+  
+  if( !froomid ){
+    return NextResponse.json(
+      {
+        ok: false,
+        message: `Room is not found`,
+      },
+      { status: 404 }
+    );
+  }
 
   // return NextResponse.json(
   //   {
