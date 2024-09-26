@@ -16,7 +16,7 @@ export const POST = async (request: NextRequest) => {
   const body: PostRequestBody = await request.json();
   const { username, password } = body;
 
-  const user = DB.users.find(
+  const user = (<Database>DB).users.find(
     (user) => user.username === username && user.password === password
   );
 
