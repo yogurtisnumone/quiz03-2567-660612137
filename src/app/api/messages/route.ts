@@ -11,7 +11,7 @@ export const GET = async (request: NextRequest) => {
     readDB();
     const body = await request.json();
     const { roomId } = body; 
-    const foundroomId = (<Database>DB).rooms.find((x:any) => x.roomId === roomId);
+    const foundroomId = (<Database>DB).rooms.find((x) => x.roomId === roomId);
     
     if( !foundroomId ){
       return NextResponse.json(
@@ -31,7 +31,7 @@ export const GET = async (request: NextRequest) => {
     //   { status: 404 }
     // );
 
-    const messages = (<Database>DB).message.filter((msg : any) => msg.roomId === roomId );
+    const messages = (<Database>DB).message.filter((msg) => msg.roomId === roomId );
     return NextResponse.json(
       {
         ok: true,
@@ -141,7 +141,7 @@ export const DELETE = async (request: NextRequest) => {
     const body: { messageId: string } = await request.json();
     const { messageId } = body;
 
-    const messageIndex = (<Database>DB).message.findIndex((msg: any) => msg.messageId === messageId);
+    const messageIndex = (<Database>DB).message.findIndex((msg) => msg.messageId === messageId);
     if (messageIndex === -1) {
       return NextResponse.json(
         {
